@@ -10,7 +10,17 @@
 <body>
 
 <div style="font-size:100px;font-family:sans-serif;font-weight:bold;text-align:center;margin-top:120px;" id="word_wrap"></div>
-<div style="margin-top:100px;text-align:center;"><button id="btn_update" style="font-size:60px;padding:20px;">Нове слово</button></div>
+
+<div style="margin-top:100px;text-align:center;">
+	<button id="btn_update" style="font-size:60px;padding:20px;">Нове слово</button>
+</div>
+
+<div style="margin-top:100px;text-align:center;">
+	<select id="sel_type" style="font-size:60px;padding:10px;">
+		<option value="plants">Рослини</option>
+		<option value="animals">Тварини</option>
+	</select>
+</div>
 	
 <script>
 	var words_animals = [
@@ -250,6 +260,8 @@
 	];
 	
 	var words = {'animals': words_animals, 'plants': words_plants};
+	var sel_type = document.getElementById("sel_type");
+	var btn_update = document.getElementById("btn_update");
 	
 	function getRandomArrayItem(arr) {
 		return arr[Math.floor(Math.random()*arr.length)];
@@ -270,7 +282,7 @@
 	}
 	
 	function updateWord() {
-		var type = "plants";
+		var type = sel_type.value;
 		var word = getRandomArrayItem(words[type]);
 		var new_word = word[0] + shuffle(word.split("").slice(1)).join("");
 
@@ -279,7 +291,8 @@
 	
 	updateWord();
 	
-	document.getElementById("btn_update").onclick = updateWord;
+	btn_update.onclick = updateWord;
+	sel_type.onchange = updateWord;
 </script>	
 </body>
 </html>
